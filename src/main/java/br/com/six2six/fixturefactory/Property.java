@@ -48,7 +48,11 @@ public class Property {
 	public Object getValue(Object owner, Processor processor) {
 		return ((RelationFunction) this.function).generateValue(owner, processor);
 	}
-	
+
+	public Function getFunction() {
+		return function;
+	}
+
 	public boolean hasRelationFunction() {
 		return this.function instanceof RelationFunction;
 	}
