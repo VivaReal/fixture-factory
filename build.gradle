@@ -28,6 +28,19 @@ dependencies {
 
 group 'br.com.six2six'
 
+repositories {
+    mavenCentral()
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url project.hasProperty("vivaRealNexusUrl") ? project.vivaRealNexusUrl : ""
+        credentials {
+            username project.hasProperty("vivaRealNexusUser") ? project.vivaRealNexusUser : ""
+            password project.hasProperty("vivaRealNexusPassword") ? project.vivaRealNexusPassword : ""
+        }
+    }
+}
+
 publishing {
     repositories {
         maven {
