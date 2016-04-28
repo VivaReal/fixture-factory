@@ -103,7 +103,7 @@ public class ObjectFactory {
 		GeneratedMessage.Builder builder = (GeneratedMessage.Builder) new Mirror().on(clazz).invoke().method("newBuilder").withoutArgs();
 		for (Property property : rule.getProperties()) {
 			Property protoProperty = new Property(property.getName() + "_", property.getFunction());
-			ReflectionUtils.invokeRecursiveSetter(builder, protoProperty.getName(), processPropertyValue(builder, protoProperty));
+			ReflectionUtils.invokeRecursiveSetter(builder, protoProperty.getName(), processPropertyValue(builder, protoProperty, rule.getProperties()));
 		}
 
 		return builder.build();
@@ -131,7 +131,7 @@ public class ObjectFactory {
 		}
 
 		for (Property property : deferredProperties) {
-			ReflectionUtils.invokeRecursiveSetter(result, property.getName(), processPropertyValue(result, property));
+			ReflectionUtils.invokeRecursiveSetter(result, property.getName(), processPropertyValue(result, property, properties));
 		}
 		return result;
 	}
@@ -236,12 +236,14 @@ public class ObjectFactory {
 		return new ObjectFactory(new TemplateHolder(fieldType), processor).createObject(rule);
 	}
 
-	protected Object processPropertyValue(Object object, Property property) {
+	protected Object processPropertyValue(Object object, Property property, Set<Property> properties) {
 		Class<?> fieldType = ReflectionUtils.invokeRecursiveType(object.getClass(), property.getName());
 		
 		Object value = null;
 		if (property.hasRelationFunction() || ReflectionUtils.isInnerClass(fieldType)) {
 		    value = processor != null ? property.getValue(object, processor) : property.getValue(object);
+		} if(property.hasDependentFunction()) {
+			value = property.getValue(properties);
 		} else {
 		    value = property.getValue();
 		}

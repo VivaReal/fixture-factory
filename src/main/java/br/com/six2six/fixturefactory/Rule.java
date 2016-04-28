@@ -189,4 +189,7 @@ public class Rule {
 	public Set<Property> getProperties() {
 		return properties;
 	}
+
+
+
 }
