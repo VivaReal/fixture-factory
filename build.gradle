@@ -37,28 +37,28 @@ repositories {
     mavenCentral()
     mavenLocal()
     mavenCentral()
-//    maven {
-//        url project.hasProperty("vivaRealNexusUrl") ? project.vivaRealNexusUrl : ""
-//        credentials {
-//            username project.hasProperty("vivaRealNexusUser") ? project.vivaRealNexusUser : ""
-//            password project.hasProperty("vivaRealNexusPassword") ? project.vivaRealNexusPassword : ""
-//        }
-//    }
+    maven {
+        url project.hasProperty("vivaRealNexusUrl") ? project.vivaRealNexusUrl : ""
+        credentials {
+            username project.hasProperty("vivaRealNexusUser") ? project.vivaRealNexusUser : ""
+            password project.hasProperty("vivaRealNexusPassword") ? project.vivaRealNexusPassword : ""
+        }
+    }
 }
 
-//publishing {
-//    repositories {
-//        maven {
-//            url project.hasProperty("nexusUrl") ? project.nexusUrl : ""
-//            credentials {
-//                username project.hasProperty("publishUser") ? project.publishUser : ""
-//                password project.hasProperty("publishPassword") ? project.publishPassword : ""
-//            }
-//        }
-//    }
-//    publications {
-//        maven(MavenPublication) {
-//            from components.java
-//        }
-//    }
-//}
+publishing {
+    repositories {
+        maven {
+            url project.hasProperty("nexusUrl") ? project.nexusUrl : ""
+            credentials {
+                username project.hasProperty("publishUser") ? project.publishUser : ""
+                password project.hasProperty("publishPassword") ? project.publishPassword : ""
+            }
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+}
