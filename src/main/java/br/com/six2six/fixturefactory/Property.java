@@ -90,6 +90,10 @@ public class Property {
         return function;
     }
 
+	public void cleanValue() {
+		value = null;
+	}
+
     @Override
 	public int hashCode() {
 		final int prime = 31;

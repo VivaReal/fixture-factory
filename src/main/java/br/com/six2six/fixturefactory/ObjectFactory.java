@@ -85,6 +85,7 @@ public class ObjectFactory {
 		Map<String, Property> constructorArguments = new HashMap<String, Property>();
 		Class<?> clazz = templateHolder.getClazz();
         Set<Property> properties = new PropertySorter(rule.getProperties()).sort();
+		properties.forEach(Property::cleanValue);
 
 		Object result;
 		if(GeneratedMessage.class.isAssignableFrom(clazz)) {
@@ -242,7 +243,7 @@ public class ObjectFactory {
 		Object value = null;
 		if (property.hasRelationFunction() || ReflectionUtils.isInnerClass(fieldType)) {
 		    value = processor != null ? property.getValue(object, processor) : property.getValue(object);
-		} if(property.hasDependentFunction()) {
+		} else if(property.hasDependentFunction()) {
 			value = property.getValue(properties);
 		} else {
 		    value = property.getValue();
