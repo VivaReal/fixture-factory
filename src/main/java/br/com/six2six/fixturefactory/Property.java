@@ -34,6 +34,10 @@ public class Property {
 	    this(name, new IdentityFunction(value));
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getName() {
 		return this.name;
 	}
