@@ -103,8 +103,10 @@ public class ObjectFactory {
 	private Object createProtobufObject(Rule rule, Class<?> clazz) {
 		GeneratedMessage.Builder builder = (GeneratedMessage.Builder) new Mirror().on(clazz).invoke().method("newBuilder").withoutArgs();
 		for (Property property : rule.getProperties()) {
-			property.setName(property.getName() + "_");
+			String originalName = property.getName();
+			property.setName(originalName + "_");
 			ReflectionUtils.invokeRecursiveSetter(builder, property.getName(), processPropertyValue(builder, property, rule.getProperties()));
+			property.setName(originalName);
 		}
 
 		return builder.build();
