@@ -22,7 +22,6 @@ public class FixtureSimplePropertyProtoTest {
         assertNotNull(proto);
         assertTrue(proto.getId() > 0);
         assertTrue(proto.getBedroomsQuantity() > 0);
-        assertNotNull(proto.getType());
         assertNotNull(proto.getAddress());
         assertNotNull(proto.getAddress().getStreet());
         assertNotNull(proto.getAddress().getStreetNumber());

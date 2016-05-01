@@ -13,7 +13,6 @@ public class PropertyTemplate implements TemplateLoader {
             add("id", sequence(Integer.class));
             add("bedroomsQuantity", random(Integer.class, range(1, 10)));
             add("address", one(SimplePropertyProto.Address.class, "valid"));
-            add("type", random(SimplePropertyProto.Type.class));
 
         }});
 

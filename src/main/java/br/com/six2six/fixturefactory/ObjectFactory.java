@@ -266,8 +266,7 @@ public class ObjectFactory {
         transformerChain.add(new SetTransformer());
         transformerChain.add(new PrimitiveTransformer());
         transformerChain.add(new WrapperTransformer());
-		transformerChain.add(new ProtoEnumTransformer());
-        
+
         if(JavaVersion.current().gte(JavaVersion.JAVA_8)){
 	    	transformerChain.add(new DateTimeTransformer());
 	    }
