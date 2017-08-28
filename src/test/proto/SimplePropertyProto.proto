@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package br.com.six2six.fixturefactory.model.proto;
+
+option java_outer_classname = "SimplePropertyProto";
+
+message SimplePropertyProto_ {
+  Property property = 1;
+}
+
+message Property {
+  int32 id = 1;
+  int32 bedrooms_quantity = 2;
+  Address address = 3;
+}
+
+message Address {
+  string street = 1;
+  string street_number = 2;
+  GeoLocation geo_location = 3;
+}
+
+message GeoLocation {
+  double latitude = 1;
+  double longitude = 2;
+}
