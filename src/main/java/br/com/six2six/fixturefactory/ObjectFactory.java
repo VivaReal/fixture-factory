@@ -4,8 +4,7 @@ import br.com.six2six.fixturefactory.processor.Processor;
 import br.com.six2six.fixturefactory.transformer.*;
 import br.com.six2six.fixturefactory.util.PropertySorter;
 import br.com.six2six.fixturefactory.util.ReflectionUtils;
-import com.google.protobuf.GeneratedMessage;
-import com.google.protobuf.Message;
+import com.google.protobuf.GeneratedMessageV3;
 import net.vidageek.mirror.dsl.Mirror;
 import org.apache.commons.lang.StringUtils;
 
@@ -88,7 +87,7 @@ public class ObjectFactory {
 		properties.forEach(Property::cleanValue);
 
 		Object result;
-		if(GeneratedMessage.class.isAssignableFrom(clazz)) {
+		if(GeneratedMessageV3.class.isAssignableFrom(clazz)) {
 			result = createProtobufObject(rule, clazz);
 		} else {
 			result = createPojoObject(constructorArguments, clazz, properties);
@@ -101,7 +100,7 @@ public class ObjectFactory {
 	}
 
 	private Object createProtobufObject(Rule rule, Class<?> clazz) {
-		GeneratedMessage.Builder builder = (GeneratedMessage.Builder) new Mirror().on(clazz).invoke().method("newBuilder").withoutArgs();
+		GeneratedMessageV3.Builder builder = (GeneratedMessageV3.Builder) new Mirror().on(clazz).invoke().method("newBuilder").withoutArgs();
 		for (Property property : rule.getProperties()) {
 			String originalName = property.getName();
 			property.setName(originalName + "_");
